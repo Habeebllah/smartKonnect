@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% load static %} {% load humanize %} {% block title %}auto bank{% endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'ogbam/form.css' %}">
+<!-- Latest compiled and minified CSS -->
+
+<!-- Latest compiled JavaScript -->
+
+<div style="padding:90px 15px 20px 15px" >
+    
+	<div class="mt-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              {% for account in user.f_account.accounts %}  
+              
+                <li class="nav-item">
+                    <a class= {% if forloop.counter == 1 %} "nav-link active" {% else %} "nav-link" {% endif %}  id="{{forloop.counter}}-tab" data-toggle="tab" href="#tab{{forloop.counter}}" role="tab" aria-controls="tab{{forloop.counter}}" aria-selected={% if forloop.counter == 1 %} "true" {% else %} "false" {% endif %} >{{account.bankName}}</a>
+                </li>
+                
+                {% endfor %}
+              
+                
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+                
+                 {% for account in user.f_account.accounts %}  
+                <div  class = {% if forloop.counter == 1 %} "tab-pane fade show active" {% else %} "tab-pane fade " {% endif %}  id="tab{{forloop.counter}}" role="tabpanel" aria-labelledby="{{forloop.counter}}-tab">
+                	<div {% if account.bankName == "Wema bank" %} class="card card-dark bg-secondary-gradient" {% elif account.bankName == "Rolez Microfinance Bank" %} class="card card-dark bg-info-gradient"{% elif account.bankName == "Fidelity bank" %} class="card card-dark bg-primary-gradient"{% else %} class="card card-dark bg-danger-gradient" {% endif %}>
+        				<div class="card-body skew-shadow">
+        				    
+        				    {% if account.bankName == "Wema bank" %}
+        					<img src="https://upload.wikimedia.org/wikipedia/en/e/ef/Wema_Bank_Plc.jpg" height="60" alt="Visa Logo">
+                          
+                          	{% elif account.bankName == "Moniepoint Microfinance Bank" %}
+                          		<img src="https://nigerialogos.com/logos/moniepoint/moniepoint.svg" height="60" alt="Rolex Logo">
+        					{% elif account.bankName == "Fidelity bank" %}
+        						<img src="https://www.seekpng.com/png/detail/356-3560448_fidelity-bank-old-logo-brandessence-fidelity-bank-nigeria.png" height="60" alt="Fidelity Logo">
+        					{% else %}
+        						<img src="https://www.fanslite.com/wp-content/uploads/2021/10/Sterling-Bank-logo.jpg" height="60" alt="Sterling Logo">
+        					{%endif%}
+                           
+                        		<h2 class="py-4 mb-0">
+                    			    Account Number: {{ account.accountNumber }}
+                    			</h2>
+
+                    			<div class="row">
+                    				<div class="col-8 pr-0">
+                    					<h3 class="fw-bold mb-1">Account Name: yuniqtelecoms - {{user.username}}</h3>
+                    					<h3 class="fw-bold mb-1">Bank Name: {{account.bankName }}</h3>
+                    					<br>
+                    					<div class="text-small text-uppercase fw-bold op-8">Automated Bank Transfer</div>
+                    					<p class="text-small ">Make transfer to this account to fund your wallet </p>
+                    				</div>
+                    				<div class="col-4 pl-0 text-right">
+                    					<h3 class="fw-bold mb-1">N50</h3>
+                    					<div class="text-small text-uppercase fw-bold op-8">Charge</div>
+                    				</div>
+                    			</div>
+
+
+        				</div>
+        			</div>
+                </div>
+                 {% endfor %}
+                
+            </div>
+        </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+        var amount = location.search.split('amount=')[1];
+ if (amount){
+        $("#amt").text(amount);
+
+
+}
+
+
+
+
+
+    });
+</script>
+
+
+    </div>
+{% endblock %}

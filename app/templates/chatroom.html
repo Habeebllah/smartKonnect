@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% load static %} {% load humanize %} {% block title %}Notification|Elecastle{% endblock %} {% block content %}
+
+<link rel="stylesheet" href="{% static 'ogbam/form.css' %}">
+
+<div style="padding:90px 15px 20px 15px" >
+
+
+    <h2>{{mysite.name|upper}} Chatroom</h2>
+
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <iframe src="https://minnit.chat/{{mysite.name|upper}}?embed&&nickname=" style="border:none;width:100%;height:500px;" allowTransparency="true"></iframe>
+            </div>
+        </div>
+    </div>
+{% endblock %}
